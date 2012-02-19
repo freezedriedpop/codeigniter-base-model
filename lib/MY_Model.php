@@ -77,8 +77,6 @@ class MY_Model extends CI_Model
     {
         parent::__construct();
         
-        $this->load->helper('inflector');
-        
         $this->_fetch_table();
     }
     
@@ -586,6 +584,8 @@ class MY_Model extends CI_Model
         if ($this->_table == NULL)
         {
             $class = preg_replace('/(_m|_model)?$/', '', get_class($this));
+
+            $this->load->helper('inflector');
             
             $this->_table = plural(strtolower($class));
         }
