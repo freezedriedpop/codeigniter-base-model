@@ -76,6 +76,36 @@ Then, for each call to `insert()`, the data passed through will be validated acc
 
 If for some reason you'd like to skip the validation, you can call `skip_validation()` before the call to `insert()` and validation won't be performed on the data for that single call.
 
+Joins
+--------
+
+This can now be used to make joining tables together easier with predefined clauses
+
+This is what you used to have to do
+
+```php
+$this->db->join('user_profiles', 'users.user_id = user_profiles.user_profile_id', 'inner');
+$this->post->get_all();
+```
+Now all you have to do is this
+
+```php
+$this->db->join('user_profiles')->get_all();
+```
+
+To get this to work you'll need to set the relationships at the top of the class
+
+```php
+class Users_model extends MY_Model {
+    public $relationships = array(
+		'user_profiles'	=>	array(
+			'type'		=>	'inner',
+			'condition'	=>	'users.user_id = user_profiles.user_profile_id'
+		)
+	);
+}
+```
+
 Other Documentation
 -------------------
 
@@ -91,3 +121,5 @@ Thanks to:
 * [Adam Jackett](http://darkhousemedia.com)
     
 ...who have all contributed a great amount of code and ideas to this MY_Model.
+
+Joins added by * [Rob Brain](http://twitter.com/freezedriedpop) based on original work by * [Jamie Rumbelow](jamierumbelow.net)
