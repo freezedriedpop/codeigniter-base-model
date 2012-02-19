@@ -92,9 +92,9 @@ class MY_Model extends CI_Model
         $this->_run_before_callbacks('get');
         
         $row = $this->db->where($this->primary_key, $primary_value)
-                        ->get($this->_table)
-                        ->row();
-                        
+                    ->get($this->_table)
+                    ->row();
+                    
         $this->_run_after_callbacks('get', array( $row ));
         
         return $row;
@@ -115,7 +115,7 @@ class MY_Model extends CI_Model
         
         $this->_run_before_callbacks('get');
         $row = $this->db->get($this->_table)
-                        ->row();
+                    ->row();
         $this->_run_after_callbacks('get', array( $row ));
         
         return $row;
@@ -162,11 +162,11 @@ class MY_Model extends CI_Model
         $this->_run_before_callbacks('get');
         
         $result = $this->db->get($this->_table)
-                            ->result();
-                
+                        ->result();
+              
         foreach ($result as &$row)
         {
-            $row = $this->_run_after_callbacks('get', array( $row ));
+          $row = $this->_run_after_callbacks('get', array( $row ));
         }
         
         return $result;
@@ -212,20 +212,20 @@ class MY_Model extends CI_Model
         
         if ($skip_validation === FALSE)
         {
-            $valid = $this->_run_validation($data);
+          $valid = $this->_run_validation($data);
         }
 
         if ($valid)
         {
-            $data = $this->_run_before_callbacks('create', array( $data ));
-                $this->db->insert($this->_table, $data);
-            $this->_run_after_callbacks('create', array( $data, $this->db->insert_id() ));
-            
-            return $this->db->insert_id();
+          $data = $this->_run_before_callbacks('create', array( $data ));
+              $this->db->insert($this->_table, $data);
+          $this->_run_after_callbacks('create', array( $data, $this->db->insert_id() ));
+          
+          return $this->db->insert_id();
         } 
         else 
         {
-            return FALSE;
+          return FALSE;
         }
     }
     
@@ -242,7 +242,7 @@ class MY_Model extends CI_Model
         
         foreach ($data as $row)
         {
-            $ids[] = $this->insert($row, $skip_validation);
+          $ids[] = $this->insert($row, $skip_validation);
         }
         
         return $ids;
@@ -263,21 +263,21 @@ class MY_Model extends CI_Model
         
         if ($skip_validation === FALSE)
         {
-            $valid = $this->_run_validation($data);
+          $valid = $this->_run_validation($data);
         }
         
         if ($valid)
         {
-            $result = $this->db->where($this->primary_key, $primary_value)
-                               ->set($data)
-                               ->update($this->_table);
-            $this->_run_after_callbacks('update', array( $data, $primary_value, $result ));
-            
-            return $result;
+          $result = $this->db->where($this->primary_key, $primary_value)
+                           ->set($data)
+                           ->update($this->_table);
+          $this->_run_after_callbacks('update', array( $data, $primary_value, $result ));
+          
+          return $result;
         } 
         else
         {
-            return FALSE;
+          return FALSE;
         }
     }
     
@@ -299,15 +299,15 @@ class MY_Model extends CI_Model
         
         if ($this->_run_validation($data))
         {
-            $result = $this->db->set($data)
-                               ->update($this->_table);
-            $this->_run_after_callbacks('update', array( $data, $args, $result ));
-            
-            return $result;
+          $result = $this->db->set($data)
+                           ->update($this->_table);
+          $this->_run_after_callbacks('update', array( $data, $args, $result ));
+          
+          return $result;
         }
         else
         {
-            return FALSE;
+          return FALSE;
         }
     }
     
@@ -327,21 +327,21 @@ class MY_Model extends CI_Model
         
         if ($skip_validation === FALSE)
         {
-            $valid = $this->_run_validation($data);
+          $valid = $this->_run_validation($data);
         }
         
         if ($valid)
         {
-            $result = $this->db->where_in($this->primary_key, $primary_values)
-                               ->set($data)
-                               ->update($this->_table);
-            $this->_run_after_callbacks('update', array( $data, $primary_value, $result ));
-            
-            return $result;
+          $result = $this->db->where_in($this->primary_key, $primary_values)
+                           ->set($data)
+                           ->update($this->_table);
+          $this->_run_after_callbacks('update', array( $data, $primary_value, $result ));
+          
+          return $result;
         } 
         else
         {
-            return FALSE;
+          return FALSE;
         }
     }
     
@@ -355,7 +355,7 @@ class MY_Model extends CI_Model
     {
         $data = $this->_run_before_callbacks('update', array( $data ));
         $result = $this->db->set($data)
-                           ->update($this->_table);
+                       ->update($this->_table);
         $this->_run_after_callbacks('update', array( $data, $result ));
         
         return $result;
@@ -372,7 +372,7 @@ class MY_Model extends CI_Model
     {
         $data = $this->_run_before_callbacks('delete', array( $id ));
         $result = $this->db->where($this->primary_key, $id)
-                           ->delete($this->_table);
+                       ->delete($this->_table);
         $this->_run_after_callbacks('delete', array( $id, $result ));
         
         return $result;
@@ -409,7 +409,7 @@ class MY_Model extends CI_Model
     {
         $data = $this->_run_before_callbacks('delete', array( $primary_values ));
         $result = $this->db->where_in($this->primary_key, $id)
-                           ->delete($this->_table);
+                       ->delete($this->_table);
         $this->_run_after_callbacks('delete', array( $primary_values, $result ));
         
         return $result;
@@ -427,27 +427,27 @@ class MY_Model extends CI_Model
         
         if(count($args) == 2)
         {
-            list($key, $value) = $args;
+          list($key, $value) = $args;
         }
         else
         {
-            $key = $this->primary_key;
-            $value = $args[0];
+          $key = $this->primary_key;
+          $value = $args[0];
         }
         
         $this->_run_before_callbacks('get', array( $key, $value ));
         
         $result = $this->db->select(array($key, $value))
-                           ->get($this->_table)
-                           ->result();
-                           
+                       ->get($this->_table)
+                       ->result();
+                       
         $result = $this->_run_after_callbacks('get', array( $key, $value, $result ));
         
         $options = array();
         
         foreach ($result as $row)
         {
-            $options[$row->{$key}] = $row->{$value};
+          $options[$row->{$key}] = $row->{$value};
         }
         
         return $options;
@@ -504,12 +504,12 @@ class MY_Model extends CI_Model
         
         if (!empty($name))
         {
-            $data = (isset($params[0])) ? $params[0] : FALSE;
+          $data = (isset($params[0])) ? $params[0] : FALSE;
         
-            foreach ($this->$name as $method)
-            {
-                $data = call_user_func_array(array($this, $method), $params);
-            }
+          foreach ($this->$name as $method)
+          {
+              $data = call_user_func_array(array($this, $method), $params);
+          }
         }
         
         return $data;
@@ -525,12 +525,12 @@ class MY_Model extends CI_Model
         
         if (!empty($name))
         {
-            $data = (isset($params[0])) ? $params[0] : FALSE;
+          $data = (isset($params[0])) ? $params[0] : FALSE;
         
-            foreach ($this->$name as $method)
-            {
-                $data = call_user_func_array(array($this, $method), $params);
-            }
+          foreach ($this->$name as $method)
+          {
+              $data = call_user_func_array(array($this, $method), $params);
+          }
         }
         
         return $data;
@@ -545,32 +545,32 @@ class MY_Model extends CI_Model
     {
         if($this->skip_validation)
         {
-            return TRUE;
+          return TRUE;
         }
         
         if(!empty($this->validate))
         {
-            foreach($data as $key => $val)
-            {
-                $_POST[$key] = $val;
-            }
-            
-            $this->load->library('form_validation');
-            
-            if(is_array($this->validate))
-            {
-                $this->form_validation->set_rules($this->validate);
-                
-                return $this->form_validation->run();
-            }
-            else
-            {
-                return $this->form_validation->run($this->validate);
-            }
+          foreach($data as $key => $val)
+          {
+              $_POST[$key] = $val;
+          }
+          
+          $this->load->library('form_validation');
+          
+          if(is_array($this->validate))
+          {
+              $this->form_validation->set_rules($this->validate);
+              
+              return $this->form_validation->run();
+          }
+          else
+          {
+              return $this->form_validation->run($this->validate);
+          }
         }
         else
         {
-            return TRUE;
+          return TRUE;
         }
     }
 
@@ -583,11 +583,11 @@ class MY_Model extends CI_Model
     {
         if ($this->_table == NULL)
         {
-            $class = preg_replace('/(_m|_model)?$/', '', get_class($this));
+          $class = preg_replace('/(_m|_model)?$/', '', get_class($this));
 
-            $this->load->helper('inflector');
-            
-            $this->_table = plural(strtolower($class));
+          $this->load->helper('inflector');
+          
+          $this->_table = plural(strtolower($class));
         }
     }
     
@@ -600,68 +600,68 @@ class MY_Model extends CI_Model
     {
         if (count($params) == 1)
         {
-            $this->db->where($params[0]);
+          $this->db->where($params[0]);
         }
         else
         {
-            $this->db->where($params[0], $params[1]);
+          $this->db->where($params[0], $params[1]);
         }
     }
     
     /**
      * Fetches the class from the pluralised table name.
-	 *
-	 * @return void
-	 */
-	protected function _fetch_class($table_name) {
-		$this->load->helper('inflector');
-            
-		return 'model_'.singular(strtolower($table_name));
-	}
+     *
+     * @return void
+     */
+     protected function _fetch_class($table_name) {
+          $this->load->helper('inflector');
+
+          return 'model_'.singular(strtolower($table_name));
+     }
     
-    /**
-	 * Joins one table to another using the relationships defined at the top of the class
-	 *
-	 * @return void
-	 */
-    public function build_join($table_name, $condition = FALSE, $type = FALSE)
-	{
-		if(!$condition) $condition = $this->relationships[$table_name]['condition'];
-		if(!$type) $type = $this->relationships[$table_name]['type'];
+     /**
+     * Joins one table to another using the relationships defined at the top of the class
+     *
+     * @return void
+     */
+     public function build_join($table_name, $condition = FALSE, $type = FALSE)
+     {
+          if(!$condition) $condition = $this->relationships[$table_name]['condition'];
+          if(!$type) $type = $this->relationships[$table_name]['type'];
 
-		$this->db->join($table_name, $condition, $type);
+          $this->db->join($table_name, $condition, $type);
 
-		return $this;
-	}
+          return $this;
+     }
 
-	/**
-	 * Joins one table to another, through another table.
-         * 
-         * e.g. Joining an articles table to a user_profiles table through a users table
-	 *
-	 * @return void
-	 */
-    public function join_through($table_name, $through_table, $condition = FALSE, $type = FALSE, $through_condition = FALSE, $through_type = FALSE)
-	{
-		$this->build_join($through_table, $through_condition, $through_type);
-
-		//If we don't have the type and condition of the join we get it from the table's model
-                //Otherwise may as well avoid loading it at all to save processing time
-                if(!$type || !$condition)
-                {
-                    $this->load->helper('inflector');
-
-                    $model_name = $this->_fetch_class($through_table);
-                    $this->load->model($model_name);
-
-                    if(!$type) $type = $this->{$model}->relationships[$table_name]['type'];
-                    if(!$condition) $condition = $this->{$model}->relationships[$table_name]['condition'];
-                }
-                
-                //It would make sense to use the table's model from a readability sense
-                //But we can sometimes save loading another class using the function we already have
-                $this->build_join($table_name, $condition, $type);
-
-		return $this;
-	}
+     /**
+     * Joins one table to another, through another table.
+     * 
+     * e.g. Joining an articles table to a user_profiles table through a users table
+     *
+     * @return void
+     */
+     public function join_through($table_name, $through_table, $condition = FALSE, $type = FALSE, $through_condition = FALSE, $through_type = FALSE)
+     {
+          $this->build_join($through_table, $through_condition, $through_type);
+     
+          //If we don't have the type and condition of the join we get it from the table's model
+          //Otherwise may as well avoid loading it at all to save processing time
+          if(!$type || !$condition)
+          {
+              $this->load->helper('inflector');
+     
+              $model_name = $this->_fetch_class($through_table);
+              $this->load->model($model_name);
+     
+              if(!$type) $type = $this->{$model}->relationships[$table_name]['type'];
+              if(!$condition) $condition = $this->{$model}->relationships[$table_name]['condition'];
+          }
+          
+          //It would make sense to use the table's model from a readability sense
+          //But we can sometimes save loading another class using the function we already have
+          $this->build_join($table_name, $condition, $type);
+     
+          return $this;
+     }
 }
