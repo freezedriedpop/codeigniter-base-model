@@ -2,8 +2,6 @@
 /**
  * A base model to provide the basic CRUD 
  * actions for all models that inherit from it.
- * 
- * Blah Blah Blah
  *
  * @package CodeIgniter
  * @subpackage MY_Model
