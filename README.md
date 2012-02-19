@@ -85,12 +85,20 @@ This is what you used to have to do
 
 ```php
 $this->db->join('user_profiles', 'users.user_id = user_profiles.user_profile_id', 'inner');
-$this->post->get_all();
+$this->user->get_all();
 ```
 Now all you have to do is this
 
 ```php
-$this->db->join('user_profiles')->get_all();
+$this->user->build_join('user_profiles')->get_all();
+```
+
+Or you could even join through another table
+
+This will get rows from users and user profiles tables for a comment
+
+```php
+$this->comment->join_through('user_profiles', 'user')->get_all();
 ```
 
 To get this to work you'll need to set the relationships at the top of the class
@@ -122,4 +130,4 @@ Thanks to:
     
 ...who have all contributed a great amount of code and ideas to this MY_Model.
 
-Joins added by * [Rob Brain](http://twitter.com/freezedriedpop) based on original work by * [Jamie Rumbelow](jamierumbelow.net)
+Joins added by [Rob Brain](http://twitter.com/freezedriedpop) based on original work by [Jamie Rumbelow](jamierumbelow.net)
